@@ -23,5 +23,6 @@ $ docker compose up -d # run database
 $ docker compose down -v # delete database and the volume
 ```
 
-##Diagram
+## Diagram
+
 <img src="/public/images/diagram.png" alt="Alt text" title="Optional title">
