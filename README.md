@@ -34,4 +34,9 @@ Halaman Landing Page
 <img src="/public/images/landingpage.png" alt="Alt text" title="Optional title">
 
 Halaman Cars
+
 <img src="/public/images/cars.png" alt="Alt text" title="Optional title">
+
+## Testing API
+
+<img src="/public/images/getall.png" alt="Alt text" title="Optional title">
