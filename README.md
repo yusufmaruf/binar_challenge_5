@@ -39,4 +39,14 @@ Halaman Cars
 
 ## Testing API
 
+Get All Data Cars
+
+<img src="/public/images/getall.png" alt="Alt text" title="Optional title">
+
+Get All Data Cars
+
+<img src="/public/images/getall.png" alt="Alt text" title="Optional title">
+
+Get One Data
+
 <img src="/public/images/getall.png" alt="Alt text" title="Optional title">
