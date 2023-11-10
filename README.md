@@ -49,4 +49,16 @@ Get All Data Cars
 
 Get One Data
 
-<img src="/public/images/getall.png" alt="Alt text" title="Optional title">
+<img src="/public/images/getone.png" alt="Alt text" title="Optional title">
+
+Delete
+
+<img src="/public/images/delete.png" alt="Alt text" title="Optional title">
+
+Update
+
+<img src="/public/images/update.png" alt="Alt text" title="Optional title">
+
+Filtered
+
+<img src="/public/images/filttered.png" alt="Alt text" title="Optional title">

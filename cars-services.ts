@@ -18,9 +18,9 @@ export class CarsService {
     this.app.get("/cars", this.cars);
     this.app.get("/carsfiltered", this.getFilteredCars);
     this.app.post("/car", this.create);
-    this.app.get("/car:id", this.getOne);
-    this.app.patch("/car:id", this.patch);
-    this.app.delete("/car:id", this.delete);
+    this.app.get("/car/:id", this.getOne);
+    this.app.patch("/car/:id", this.patch);
+    this.app.delete("/car/:id", this.delete);
   }
 
   async getMany(_: Request, res: Response) {
