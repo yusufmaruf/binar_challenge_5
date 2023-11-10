@@ -26,3 +26,12 @@ $ docker compose down -v # delete database and the volume
 ## Diagram
 
 <img src="/public/images/diagram.png" alt="Alt text" title="Optional title">
+
+## Konfigurasi dengan Template challenge 3
+
+Halaman Landing Page
+
+<img src="/public/images/landingpage.png" alt="Alt text" title="Optional title">
+
+Halaman Cars
+<img src="/public/images/cars.png" alt="Alt text" title="Optional title">
