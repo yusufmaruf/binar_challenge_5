@@ -2,6 +2,7 @@ import { Express, Request, Response } from "express";
 import { CarsService } from "../services/cars";
 import { Cars } from "../models/cars";
 import { errorWrapper } from "../utils/errorwrapper";
+import { authenticateToken, isAdmin } from "../utils/auth";
 
 interface IParams {
   id: string;
@@ -17,7 +18,7 @@ export  class CarsController {
   }
 
   init() {
-    this.app.get("/cars", (req, res) => this.getMany(req, res));
+    this.app.get("/cars", authenticateToken,isAdmin, (req, res) => this.getMany(req, res));
     this.app.get("/cars/:id", (req, res) => this.getOne(req, res));
     this.app.post("/cars", (req, res) => this.create(req, res));
     this.app.patch("/cars/:id", (req, res) => this.update(req, res));

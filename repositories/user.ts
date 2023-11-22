@@ -1,11 +1,12 @@
-import { Users, UserModel } from '../models/users';
+// user.repository.ts
+import { UserModel, Users } from "../models/users";
 
 export class UserRepository {
-  async findByEmail(email: string): Promise<Users | undefined> {
-    return UserModel.query().where('email', email).first();
+  static async findByEmail(email: string): Promise<Users | undefined> {
+    return UserModel.query().findOne({ email: email.toLowerCase() });
   }
 
-  async create(user: Partial<Users>): Promise<Users> {
-    return UserModel.query().insert(user);
+  static async createUser(name: string, email: string, password: string): Promise<Users> {
+    return UserModel.query().insert({ name, email, password });
   }
 }
