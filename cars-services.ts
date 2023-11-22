@@ -1,7 +1,6 @@
 import { Express, Response, Request } from "express";
 import { CarsModel, Cars } from "./models/cars";
 import { spec } from "node:test/reporters";
-import  multer  from "multer";
 
 
 
