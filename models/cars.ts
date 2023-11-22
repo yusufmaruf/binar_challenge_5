@@ -1,5 +1,7 @@
 import { ModelObject } from "objection";
 import { ModelWithValidator } from "./base";
+import { Model } from "objection";
+import { Users, UserModel } from "./users";
 
 export class CarsModel extends ModelWithValidator {
   id!: number;
@@ -15,6 +17,7 @@ export class CarsModel extends ModelWithValidator {
   availableAt!: string;
   available!: boolean;
   year!: number;
+  last_modified_by!: number;
   options!: string;
   specs!: string;
 
@@ -32,6 +35,16 @@ export class CarsModel extends ModelWithValidator {
       },
     };
   }
+   static relationMappings = {
+    lastModifiedBy: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: UserModel,
+      join: {
+        from: "cars.last_modified_by",
+        to: "users.id",
+      },
+    },
+  };
 }
 
 export type Cars = ModelObject<CarsModel>;

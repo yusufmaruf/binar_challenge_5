@@ -22,8 +22,6 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
 }
 export function isAdmin(req: Request, res: Response, next: NextFunction) {
   const user = req.user as { role: string } | undefined;
-  console.log(user);
-  console.log(user?.role);
 
   if (!user || user.role !== "admin") {
     return res.status(403).json({ message: "Forbidden - Only admins can perform this action" });

@@ -20,6 +20,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: true,
       type: "Sedan",
+      last_modified_by: null,
       year: 2022,
       options: [
         "Cruise Control",
@@ -51,6 +52,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Convertible",
+      last_modified_by: null,
       year: 2019,
       options: [
         "Keyless Entry",
@@ -82,6 +84,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automanual",
       available: true,
       type: "Sedan",
+      last_modified_by: null,
       year: 2021,
       options: [
         "Bucket Seats",
@@ -116,6 +119,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Manual",
       available: true,
       type: "Hatchback",
+      last_modified_by: null,
       year: 2018,
       options: [
         "Alloy Wheels",
@@ -151,6 +155,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Minivan",
+      last_modified_by: null,
       year: 2020,
       options: [
         "CD (Multi Disc)",
@@ -181,6 +186,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automanual",
       available: true,
       type: "Hatchback",
+      last_modified_by: null,
       year: 2016,
       options: [
         "Leather Interior",
@@ -212,6 +218,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Sedan",
+      last_modified_by: null,
       year: 2020,
       options: [
         "AM/FM Stereo",
@@ -246,6 +253,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Manual",
       available: true,
       type: "Regular Cab Pickup",
+      last_modified_by: null,
       year: 2014,
       options: [
         "Fog Lights",
@@ -277,6 +285,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Extended Cab Pickup",
+      last_modified_by: null,
       year: 2012,
       options: [
         "CD (Multi Disc)",
@@ -310,6 +319,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Manual",
       available: true,
       type: "Hatchback",
+      last_modified_by: null,
       year: 2019,
       options: [
         "Third Row Seats",
@@ -340,6 +350,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Coupe",
+      last_modified_by: null,
       year: 2019,
       options: [
         "Alloy Wheels",
@@ -373,6 +384,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automanual",
       available: true,
       type: "Passenger Van",
+      last_modified_by: null,
       year: 2018,
       options: [
         "Premium Sound",
@@ -410,6 +422,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "CVT",
       available: true,
       type: "SUV",
+      last_modified_by: null,
       year: 2017,
       options: [
         "Memory Seats",
@@ -440,6 +453,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Manual",
       available: false,
       type: "Regular Cab Pickup",
+      last_modified_by: null,
       year: 2020,
       options: [
         "Bucket Seats",
@@ -473,6 +487,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automanual",
       available: true,
       type: "Regular Cab Pickup",
+      last_modified_by: null,
       year: 2017,
       options: [
         "Third Row Seats",
@@ -509,6 +524,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automanual",
       available: true,
       type: "Convertible",
+      last_modified_by: null,
       year: 2021,
       options: [
         "Leather Interior",
@@ -540,6 +556,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automanual",
       available: false,
       type: "Regular Cab Pickup",
+      last_modified_by: null,
       year: 2015,
       options: [
         "Alarm",
@@ -574,6 +591,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "CVT",
       available: false,
       type: "Sedan",
+      last_modified_by: null,
       year: 2014,
       options: [
         "Moonroof/Sunroof",
@@ -607,6 +625,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Convertible",
+      last_modified_by: null,
       year: 2021,
       options: [
         "CD (Single Disc)",
@@ -643,6 +662,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Crew Cab Pickup",
+      last_modified_by: null,
       year: 2012,
       options: [
         "Navigation",
@@ -675,6 +695,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Manual",
       available: false,
       type: "SUV",
+      last_modified_by: null,
       year: 2013,
       options: [
         "Memory Seats",
@@ -706,6 +727,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Coupe",
+      last_modified_by: null,
       year: 2020,
       options: [
         "Memory Seats",
@@ -742,6 +764,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Extended Cab Pickup",
+      last_modified_by: null,
       year: 2022,
       options: [
         "Rear Window Defroster",
@@ -779,6 +802,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "Automatic",
       available: false,
       type: "Sedan",
+      last_modified_by: null,
       year: 2022,
       options: [
         "Moonroof/Sunroof",
@@ -812,6 +836,7 @@ export async function seed(knex: Knex): Promise<void> {
       transmission: "CVT",
       available: false,
       type: "Wagon",
+      last_modified_by: null,
       year: 2015,
       options: [
         "CD (Single Disc)",

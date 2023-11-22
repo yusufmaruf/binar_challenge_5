@@ -5,7 +5,7 @@ import { errorWrapper } from "../utils/errorwrapper";
 import { authenticateToken, isAdmin } from "../utils/auth";
 
 interface IParams {
-  id: string;
+  [key: string]: string;
 }
 
 export  class CarsController {
@@ -21,7 +21,7 @@ export  class CarsController {
     this.app.get("/cars", authenticateToken,isAdmin, (req, res) => this.getMany(req, res));
     this.app.get("/cars/:id", (req, res) => this.getOne(req, res));
     this.app.post("/cars", (req, res) => this.create(req, res));
-    this.app.patch("/cars/:id", (req, res) => this.update(req, res));
+    this.app.patch("/cars/:id",authenticateToken,isAdmin, (req, res) => this.update(req, res));
     this.app.delete("/cars/:id", (req, res) => this.del(req, res));
     this.app.get("/filtered-cars", (req, res) => this.getFilteredCars(req, res));
       
@@ -51,18 +51,42 @@ export  class CarsController {
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }
-}
-
-  async update(req: Request<IParams, {}, Partial<Cars>>, res: Response) {
+  }
+  
+ 
+async update(req: Request<IParams, {}, Partial<Cars>>, res: Response) {
   try {
     const id = +req.params.id;
     const body = req.body;
+
+    // Check if req.user is defined and has the "admin" role
+    const user = req.user as { role: string, id: number } | undefined;
+
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ error: 'Unauthorized - Only admins can perform this action' });
+    }
+
+    // Extract the user ID from the user object
+    const lastModifiedById = id;
+    console.log(lastModifiedById);
+
+    // Update last_modified_by field with the user ID
+    body.last_modified_by = lastModifiedById;
+
+    // Call the service to update the car
     await this.service.update(id, body);
+
+    // Send a success response
     return res.status(200).json({ success: true, result: body });
   } catch (error) {
+    // Handle errors
+    console.error(error);
     return res.status(500).json({ error: 'Internal server error' });
   }
 }
+ 
+
+
 
  async del(req: Request<IParams>, res: Response) {
   try {
@@ -72,7 +96,7 @@ export  class CarsController {
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }
-    }
+}
     async getFilteredCars(req: Request, res: Response) {
     try {
       const { date, capacity } = req.query;
