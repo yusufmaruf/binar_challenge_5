@@ -1,5 +1,6 @@
 import { ModelObject } from "objection";
 import { ModelWithValidator } from "./base";
+import bcrypt from "bcrypt";
 
 export class UserModel extends ModelWithValidator {
   id!: number;
@@ -10,6 +11,11 @@ export class UserModel extends ModelWithValidator {
 
   static get tableName() {
     return "users";
+  }
+
+   async $beforeInsert() {
+    // Hash password before inserting into the database
+    this.password = await bcrypt.hash(this.password, 10);
   }
 
   static get jsonSchema() {
@@ -23,6 +29,7 @@ export class UserModel extends ModelWithValidator {
       },
     };
   }
+  
 }
 
 export type Users = ModelObject<UserModel>;

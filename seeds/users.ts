@@ -12,14 +12,14 @@ export async function seed(knex: Knex): Promise<void> {
     // Inserts seed entries
     await knex(tableName).insert([
         {
-            id: 1,
+            
             name: "Admin",
             email: "admin@admin",
             password: hashedPasswordAdmin,
             role: "admin",
         },
         {
-            id: 2,
+            
             name: "Super Admin",
             email: "superadmin@admin",
             password: hashedPasswordSuperAdmin,
