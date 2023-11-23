@@ -18,7 +18,7 @@ export  class CarsController {
   }
 
   init() {
-    this.app.get("/cars", authenticateToken,isfulladmin, (req, res) => this.getMany(req, res));
+    this.app.get("/cars",  (req, res) => this.getMany(req, res));
     this.app.get("/cars/:id", (req, res) => this.getOne(req, res));
     this.app.post("/cars",authenticateToken,isfulladmin, (req, res) => this.create(req, res));
     this.app.patch("/cars/:id",authenticateToken,isfulladmin, (req, res) => this.update(req, res));

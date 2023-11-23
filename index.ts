@@ -5,11 +5,19 @@ import { CarsController } from "./controllers/cars";
 import cors from 'cors';
 import { UserController } from "./controllers/authcontroller";
 
-import jwt from "jsonwebtoken";
-import { TOKEN_SECRET } from "./utils/auth";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json";
+
+
 
 const app: Express = express();
 const PORT = 3000;
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
+
+
 
 // Connect ORM to Database
 const knexInstance = knex({
