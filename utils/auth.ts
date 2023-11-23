@@ -21,14 +21,25 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
     next();
   });
 }
+export function isfulladmin(req: Request, res: Response, next: NextFunction) {
+  const user = req.user as { role: string } | undefined;
+  console.log(user);
+
+  if (!user || user.role !== "admin" && user.role !== "superadmin") {
+    return res.status(403).json({ message: "Forbidden - Only admins and Super Admin can perform this action" });
+  }
+
+  next();
+}
 export function isAdmin(req: Request, res: Response, next: NextFunction) {
   const user = req.user as { role: string } | undefined;
   console.log(user);
 
-  if (!user || user.role !== "admin") {
+  if (!user || user.role !== "superadmin") {
     return res.status(403).json({ message: "Forbidden - Only admins can perform this action" });
   }
 
   next();
 }
+
 

@@ -2,7 +2,7 @@ import { Express, Request, Response } from "express";
 import { CarsService } from "../services/cars";
 import { Cars } from "../models/cars";
 import { errorWrapper } from "../utils/errorwrapper";
-import { authenticateToken, isAdmin } from "../utils/auth";
+import { authenticateToken, isfulladmin, isAdmin } from "../utils/auth";
 
 interface IParams {
   [key: string]: string;
@@ -18,12 +18,12 @@ export  class CarsController {
   }
 
   init() {
-    this.app.get("/cars", authenticateToken,isAdmin, (req, res) => this.getMany(req, res));
+    this.app.get("/cars", authenticateToken,isfulladmin, (req, res) => this.getMany(req, res));
     this.app.get("/cars/:id", (req, res) => this.getOne(req, res));
-    this.app.post("/cars", (req, res) => this.create(req, res));
-    this.app.patch("/cars/:id",authenticateToken,isAdmin, (req, res) => this.update(req, res));
-    this.app.delete("/cars/:id", (req, res) => this.del(req, res));
- 
+    this.app.post("/cars",authenticateToken,isfulladmin, (req, res) => this.create(req, res));
+    this.app.patch("/cars/:id",authenticateToken,isfulladmin, (req, res) => this.update(req, res));
+    this.app.delete("/cars/:id", (req, res) => this.del(req, res)); 
+    this.app.delete("/carsdelete/:id",authenticateToken,isfulladmin, (req, res) => this.softDelete(req, res)); 
     this.app.get("/filtered-cars", (req, res) => this.getFilteredCars(req, res));
       
   }
@@ -46,7 +46,19 @@ export  class CarsController {
 
 
  async create(req: Request<{}, {}, Cars>, res: Response) {
-  try {
+   try {
+    const user = req.user as { id: number; role: string };
+    console.log(user);
+
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ error: 'Unauthorized - Only admins can perform this action' });
+    }
+
+    // Extract the user ID from the user object
+    const lastModifiedById = user?.id;
+
+    // Update last_modified_by field with the user ID
+    req.body.last_modified_by = lastModifiedById;
     await this.service.create(req.body);
     return res.status(201).json({ message: 'Car created successfully' });
   } catch (error) {
@@ -127,4 +139,21 @@ async update(req: Request<IParams, {}, Partial<Cars>>, res: Response) {
       res.status(500).json({ error: 'Internal server error' });
     }
   }
+  async softDelete(req: Request<IParams>, res: Response) {
+  try {
+    const id = +req.params.id;
+    const user = req.user as { id: number; role: string };
+    const adminId = user?.id;
+
+    if (!adminId) {
+      return res.status(403).json({ error: 'Unauthorized - Admin ID not available' });
+    }
+
+    await this.service.softDelete(id, adminId);
+
+    return res.status(200).json({ message: 'Car soft deleted successfully' });
+  } catch (error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
 }

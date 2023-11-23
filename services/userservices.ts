@@ -1,5 +1,6 @@
 // user.service.ts
 import bcrypt from "bcryptjs";
+import { Express, Response, Request } from "express";
 import jwt from "jsonwebtoken";
 import { UserRepository, } from "../repositories/user";
 import { Users } from "../models/users";
@@ -7,8 +8,13 @@ import { TOKEN_SECRET } from "../utils/auth";
 
 
 export class UserService {
-  static async loginUser(email: string, password: string): Promise<string | undefined> {
-    const user = await UserRepository.findByEmail(email);
+  UserRepository: UserRepository;
+
+  constructor() {
+    this.UserRepository = new UserRepository();
+  }
+   async loginUser(email: string, password: string): Promise<string | undefined> {
+    const user = await this.UserRepository.findByEmail(email);
     console.log(user);
 
     if (!user) {
@@ -21,20 +27,20 @@ export class UserService {
       return undefined; // Wrong credentials
     }
 
-    const token = jwt.sign({ email: user.email, id: user, role: user.role }, TOKEN_SECRET, {
+    const token = jwt.sign({ email: user.email, id: user.id, role: user.role }, TOKEN_SECRET, {
       expiresIn: "1h",
     });
 
     return token;
   }
 
-  static async registerUser(name: string, email: string, password: string): Promise<Users | undefined> {
-    const existingUser = await UserRepository.findByEmail(email);
+   async registerUser(userData: Users): Promise<Users | undefined> {
+    const existingUser = await this.UserRepository.findByEmail(userData.email);
 
     if (existingUser) {
       return undefined; // Email already registered
     }
 
-    return UserRepository.createUser(name, email, password);
+    return this.UserRepository.createUser(userData);
   }
 }

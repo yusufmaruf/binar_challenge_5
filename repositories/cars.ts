@@ -3,7 +3,7 @@ import { Express, Response, Request } from "express";
 
 export  class CarsRepository {
     async getMany(): Promise<Cars[]>{
-        const cars = await CarsModel.query();
+        const cars = await CarsModel.query().where("deleted", false).withGraphFetched("lastModifiedBy");
         return cars;
     }
 
