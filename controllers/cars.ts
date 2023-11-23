@@ -23,6 +23,7 @@ export  class CarsController {
     this.app.post("/cars", (req, res) => this.create(req, res));
     this.app.patch("/cars/:id",authenticateToken,isAdmin, (req, res) => this.update(req, res));
     this.app.delete("/cars/:id", (req, res) => this.del(req, res));
+ 
     this.app.get("/filtered-cars", (req, res) => this.getFilteredCars(req, res));
       
   }
@@ -60,15 +61,15 @@ async update(req: Request<IParams, {}, Partial<Cars>>, res: Response) {
     const body = req.body;
 
     // Check if req.user is defined and has the "admin" role
-    const user = req.user as { role: string, id: number } | undefined;
+    const user = req.user as { id: number; role: string };
+    console.log(user);
 
     if (!user || user.role !== 'admin') {
       return res.status(403).json({ error: 'Unauthorized - Only admins can perform this action' });
     }
 
     // Extract the user ID from the user object
-    const lastModifiedById = id;
-    console.log(lastModifiedById);
+    const lastModifiedById = user?.id;
 
     // Update last_modified_by field with the user ID
     body.last_modified_by = lastModifiedById;
@@ -96,7 +97,8 @@ async update(req: Request<IParams, {}, Partial<Cars>>, res: Response) {
   } catch (error) {
     return res.status(500).json({ error: 'Internal server error' });
   }
-}
+  }
+ 
     async getFilteredCars(req: Request, res: Response) {
     try {
       const { date, capacity } = req.query;

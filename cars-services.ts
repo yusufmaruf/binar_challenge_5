@@ -1,14 +1,17 @@
 import { Express, Response, Request } from "express";
 import { CarsModel, Cars } from "./models/cars";
 import { spec } from "node:test/reporters";
+import { CarsRepository } from "./repositories/cars";
 
 
 
 export class CarsService {
   app: Express;
+  carsrepository: CarsRepository;
 
   constructor(app: Express) {
     this.app = app;
+    this.carsrepository = new CarsRepository();
   }
 
   init() {
@@ -28,7 +31,18 @@ export class CarsService {
   }
 
 
- async getFilteredCars(req: Request, res: Response) {
+ async softDelete(id: number, adminId: number): Promise<void> {
+  try {
+    await this.carsrepository.softDelete(id.toString(), adminId);
+    // You might want to send a response back to the controller or handle it as needed.
+  } catch (error) {
+    // Handle the error, for example, log it.
+    console.error(error);
+    throw new Error('Internal server error');
+  }
+ }
+  
+  async getFilteredCars(req: Request, res: Response) {
   try {
     // Get data from the request body
     const { date, capacity } = req.query;

@@ -44,6 +44,20 @@ export  class CarsRepository {
     }
   }
 
+  async softDelete(id: string, adminId: number): Promise<number> {
+  try {
+    const body = {
+      deleted: true,
+      last_modified_by: adminId,
+    };
+
+    const result = await CarsModel.query().findById(id).patch(body);
+    return result || 0; // Return 0 if result is falsy (undefined or null)
+  } catch (error) {
+    throw error; // Handle the error as per your application's needs
+  }
+}
+
 
     async getFilteredCars(date?: Date, capacity?: number): Promise<Cars[]> {
         let query = CarsModel.query();

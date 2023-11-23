@@ -17,11 +17,13 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
     }
 
     req.user = user;
+    console.log(req.user);
     next();
   });
 }
 export function isAdmin(req: Request, res: Response, next: NextFunction) {
   const user = req.user as { role: string } | undefined;
+  console.log(user);
 
   if (!user || user.role !== "admin") {
     return res.status(403).json({ message: "Forbidden - Only admins can perform this action" });

@@ -18,6 +18,7 @@ export class CarsModel extends ModelWithValidator {
   available!: boolean;
   year!: number;
   last_modified_by!: number;
+  deleted!: boolean;
   options!: string;
   specs!: string;
 

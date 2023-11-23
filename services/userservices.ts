@@ -9,6 +9,7 @@ import { TOKEN_SECRET } from "../utils/auth";
 export class UserService {
   static async loginUser(email: string, password: string): Promise<string | undefined> {
     const user = await UserRepository.findByEmail(email);
+    console.log(user);
 
     if (!user) {
       return undefined; // User not found

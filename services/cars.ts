@@ -2,6 +2,7 @@ import { Express, Request, Response } from "express";
 import { CarsRepository } from "../repositories/cars";
 import { Cars } from "../models/cars";
 
+
 export class CarsService {
   private carsRepository: CarsRepository;
 
@@ -19,6 +20,17 @@ async getOne(id: number): Promise<Cars | undefined> {
   return car;
 }
 
+   async softDelete(id: number, adminId: number): Promise<void> {
+  try {
+    await this.carsRepository.softDelete(id.toString(), adminId);
+    // You might want to send a response back to the controller or handle it as needed.
+  } catch (error) {
+    // Handle the error, for example, log it.
+    console.error(error);
+    throw new Error('Internal server error');
+  }
+ }
+  
 
 async create(carData: Cars): Promise<void> {
   try {

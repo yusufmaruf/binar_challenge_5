@@ -17,6 +17,7 @@ export async function up(knex: Knex): Promise<void> {
     table.boolean("available").notNullable().defaultTo(false);
     table.integer("year", 4).notNullable();
     table.integer("last_modified_by").unsigned().references("id").inTable("users").nullable();
+    table.boolean("deleted").notNullable().defaultTo(false);
     table.timestamp("last_modified_at").defaultTo(knex.fn.now());
     table.jsonb("options").notNullable();
     table.jsonb("specs").notNullable();
