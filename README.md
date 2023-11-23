@@ -2,6 +2,11 @@
 
 Simple express TS starter!
 
+# Express TS Starter
+
+Dokumentasi API SWagger
+http://localhost:3000/api-docs/#/
+
 ## How to use?
 
 ```

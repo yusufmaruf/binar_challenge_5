@@ -15,7 +15,7 @@ const PORT = 3000;
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
+app.use(express.urlencoded({ extended: true }));
 
 
 

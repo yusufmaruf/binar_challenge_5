@@ -22,8 +22,8 @@ export  class CarsController {
     this.app.get("/cars/:id", (req, res) => this.getOne(req, res));
     this.app.post("/cars",authenticateToken,isfulladmin, (req, res) => this.create(req, res));
     this.app.patch("/cars/:id",authenticateToken,isfulladmin, (req, res) => this.update(req, res));
-    this.app.delete("/cars/:id", (req, res) => this.del(req, res)); 
-    this.app.delete("/carsdelete/:id",authenticateToken,isfulladmin, (req, res) => this.softDelete(req, res)); 
+    // this.app.delete("/cars/:id", (req, res) => this.del(req, res)); 
+    this.app.delete("/cars/:id",authenticateToken,isfulladmin, (req, res) => this.softDelete(req, res)); 
     this.app.get("/filtered-cars", (req, res) => this.getFilteredCars(req, res));
       
   }
@@ -111,7 +111,7 @@ async update(req: Request<IParams, {}, Partial<Cars>>, res: Response) {
   }
   }
  
-    async getFilteredCars(req: Request, res: Response) {
+  async getFilteredCars(req: Request, res: Response) {
     try {
       const { date, capacity } = req.query;
 
